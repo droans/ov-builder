@@ -176,7 +176,7 @@ WORKDIR /app
 RUN cd /app && \
     uv venv && \
     uv sync && \
-    uv pip install pip
+    uv pip install pip pybind11-stubgen==2.5.5
 ENV PATH="/app/.venv/bin:$PATH"
 
 CMD ["bash", "-c", "python /app/main.py"]
