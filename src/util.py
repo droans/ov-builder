@@ -162,7 +162,7 @@ def export_config(config: ConfigModel) -> None:
     save_dir = os.environ[ENV_WHEEL_DIR]
     path = Path(save_dir, UPDATE_CONFIG_FILE_NAME)
     with open(path, "w") as f:
-        f.write(config.model_dump_json())
+        f.write(config.model_dump_json(indent=4))
 
 
 def get_log_level_env() -> LogLevels:
