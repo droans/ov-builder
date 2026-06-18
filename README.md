@@ -33,10 +33,11 @@ services:
 | OUTPUT_DIR                 | str  | Container directory to save wheels                                       | /output                        |      |
 | USE_DATED_FOLDERS          | int  | Save wheels to dated subdirectories                                      | 1                              | 4    |
 | SAVE_UPDATE_CONFIG         | int  | Save the config used to generate the wheels                              | 1                              |      |
-
+| LOG_LEVEL                  | str  | Logging level to use.                                                    | info                           | 5    |
 
 ##### Notes
 1. Options: ocl, ocl-debug, ze, ze-debug, sycl, sycl-debug. Some options may not be enabled yet.
 2. When `OPENVINO_BUILD_TYPE` and `OPENVINO_BUILD_FILE` are both provided, `OPENVINO_BUILD_FILE` will take priority.
 3. When `XXX_GIT_PR` and `XXX_GIT_BRANCH` are both provided, `XXX_GIT_PR` will take priority.
 4. Date format used is "`%Y-%m-%d_%H:%M:%S"`
+5. Options: debug, info, warn, error, critical, fatal

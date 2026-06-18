@@ -1,13 +1,16 @@
 """Utility functions."""
 
 import logging
+import logging.handlers
 import os
 import uuid
 from datetime import datetime
 from pathlib import Path
+from typing import cast
 
 from src.const import (
     DEFAULT_BRANCHES,
+    DEFAULT_LOG_LEVEL,
     DEFAULT_OUTPUT_DIR,
     DEFAULT_REMOTES,
     ENV_GENAI,
@@ -15,6 +18,7 @@ from src.const import (
     ENV_GIT_PR_SUFFIX,
     ENV_GIT_PR_USED_MERGED_SUFFIX,
     ENV_GIT_REMOTE_SUFFIX,
+    ENV_LOG_LEVEL,
     ENV_OUTPUT_DIR,
     ENV_OV,
     ENV_OV_BUILD_FILE,
@@ -24,9 +28,14 @@ from src.const import (
     ENV_UPDATE_PREFIX,
     ENV_USE_DATED_FOLDERS,
     ENV_WHEEL_DIR,
+    LOG_DATE_FORMAT,
+    LOG_FORMAT,
+    LOG_LEVEL_MAP,
     REPO_DIRECTORIES,
     UPDATE_CONFIG_FILE_NAME,
+    LogLevels,
     PackageType,
+    log_levels,
 )
 from src.models import (
     BasePackageUpdateModel,
@@ -110,11 +119,13 @@ def build_options_config() -> ConfigOptions:
     output_dir = Path(os.getenv(ENV_OUTPUT_DIR) or DEFAULT_OUTPUT_DIR)
     use_dated_folders = os.getenv(ENV_USE_DATED_FOLDERS) != "0"
     save_update_config = os.getenv(ENV_SAVE_UPDATE_CONFIG) != "0"
+    log_level = get_log_level_env()
 
     return ConfigOptions(
         OutputDirectory=output_dir,
         UseDatedFolders=use_dated_folders,
         SaveUpdateConfig=save_update_config,
+        LogLevel=log_level,
     )
 
 
@@ -148,3 +159,29 @@ def export_environ(config: ConfigModel) -> None:
     path = Path(save_dir, UPDATE_CONFIG_FILE_NAME)
     with open(path, "w") as f:
         f.write(config.model_dump_json())
+
+
+def get_log_level_env() -> LogLevels:
+    """Get the log level from the env variable."""
+    log_level_val = os.getenv(ENV_LOG_LEVEL)
+    return cast("LogLevels", log_level_val) if log_level_val in log_levels else DEFAULT_LOG_LEVEL
+
+
+def set_logging() -> list[logging.Handler]:
+    """Set the logging config."""
+    log_level = LOG_LEVEL_MAP[get_log_level_env()]
+
+    formatter = logging.Formatter(LOG_FORMAT)
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(log_level)
+    stream_handler.setFormatter(formatter)
+    result: list[logging.Handler] = [stream_handler]
+
+    logging.basicConfig(
+        format=LOG_FORMAT,
+        datefmt=LOG_DATE_FORMAT,
+        level=log_level,
+        handlers=result,
+    )
+    return result

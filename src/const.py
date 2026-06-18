@@ -1,5 +1,7 @@
 """Constants."""
 
+import logging
+import typing
 from typing import Literal
 
 BuildTypes = Literal[
@@ -33,6 +35,7 @@ ENV_OV_BUILD_FILE = "OPENVINO_BUILD_FILE"
 ENV_OUTPUT_DIR = "OUTPUT_DIR"
 ENV_USE_DATED_FOLDERS = "USE_DATED_FOLDERS"
 ENV_SAVE_UPDATE_CONFIG = "SAVE_UPDATE_CONFIG"
+ENV_LOG_LEVEL = "LOG_LEVEL"
 
 DEFAULT_OUTPUT_DIR = "/output"
 DEFAULT_USE_DATED_FOLDERS = True
@@ -67,3 +70,26 @@ OV_BUILD_SCRIPTS_PATH: dict[BuildTypes, str | None] = {
 }
 GENAI_BUILD_SCRIPT = "/build_scripts/genai/build.sh"
 TOKENIZERS_BUILD_SCRIPT = "/build_scripts/tokenizers/build.sh"
+
+LogLevels = Literal[
+    "debug",
+    "info",
+    "warn",
+    "error",
+    "critical",
+    "fatal",
+]
+
+LOG_LEVEL_MAP: dict[LogLevels, int] = {
+    "debug": logging.DEBUG,
+    "info": logging.INFO,
+    "warn": logging.WARNING,
+    "error": logging.ERROR,
+    "critical": logging.CRITICAL,
+    "fatal": logging.FATAL,
+}
+log_levels: list[LogLevels] = list(typing.get_args(LogLevels))
+
+DEFAULT_LOG_LEVEL: LogLevels = "info"
+LOG_FORMAT = "%(asctime)s | %(levelname)s | %(message)s"
+LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"

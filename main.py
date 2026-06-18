@@ -3,8 +3,9 @@
 import logging
 
 from src.build import build_genai, build_openvino, build_tokenizers
-from src.util import build_config_from_env, set_script_envs
+from src.util import build_config_from_env, set_logging, set_script_envs
 
+# Set initial config before logger has loaded
 logger = logging.getLogger(__name__)
 log_fmt = "%(asctime)s | %(levelname)s | %(message)s"
 handler = logging.StreamHandler()
@@ -26,6 +27,9 @@ def main() -> None:
     logger.debug(config)
     logger.debug("Setting script envs...")
     set_script_envs(config)
+    logger.debug("Initializing logger settings...")
+    set_logging()
+    logger.debug("Initializing Logger settings initialized...")
     logger.debug("Set script envs.")
     build_openvino(config.Packages.OpenVINO)
     build_tokenizers(config.Packages.Tokenizers)

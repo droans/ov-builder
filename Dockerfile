@@ -160,6 +160,7 @@ ENV OUTPUT_DIR="/output"
 ENV USE_DATED_FOLDERS=1
 # Save configuration from environmental variables with the built wheels. 1=Yes, 0=No (Default: 1)
 ENV SAVE_UPDATE_CONFIG=1
+ENV LOG_LEVEL=info
 
 # ============================================================================
 # Clone and setup program

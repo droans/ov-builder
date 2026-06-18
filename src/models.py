@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, DirectoryPath, FilePath
 
-from src.const import BuildTypes
+from src.const import BuildTypes, LogLevels
 
 
 class BasePackageUpdateModel(BaseModel):
@@ -34,6 +34,7 @@ class ConfigOptions(BaseModel):
     OutputDirectory: DirectoryPath
     UseDatedFolders: bool
     SaveUpdateConfig: bool
+    LogLevel: LogLevels
 
 
 class UpdateConfigModel(BaseModel):
