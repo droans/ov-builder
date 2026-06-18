@@ -93,3 +93,6 @@ log_levels: list[LogLevels] = list(typing.get_args(LogLevels))
 DEFAULT_LOG_LEVEL: LogLevels = "info"
 LOG_FORMAT = "%(asctime)s | %(levelname)s | %(message)s"
 LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+ENV_LOG_TO_FILE = "LOG_TO_FILE"
+DEFAULT_LOG_TO_FILE = True
+LOG_FILE_NAME = "ov_builder.log"

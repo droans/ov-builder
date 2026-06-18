@@ -34,6 +34,7 @@ services:
 | USE_DATED_FOLDERS          | int  | Save wheels to dated subdirectories                                      | 1                              | 4    |
 | SAVE_UPDATE_CONFIG         | int  | Save the config used to generate the wheels                              | 1                              |      |
 | LOG_LEVEL                  | str  | Logging level to use.                                                    | info                           | 5    |
+| LOG_TO_FILE                | int  | Save logs to file. Will save in the output directory.                    | 1                              |      |
 
 ##### Notes
 1. Options: ocl, ocl-debug, ze, ze-debug, sycl, sycl-debug. Some options may not be enabled yet.

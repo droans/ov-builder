@@ -19,6 +19,7 @@ from src.const import (
     ENV_GIT_PR_USED_MERGED_SUFFIX,
     ENV_GIT_REMOTE_SUFFIX,
     ENV_LOG_LEVEL,
+    ENV_LOG_TO_FILE,
     ENV_OUTPUT_DIR,
     ENV_OV,
     ENV_OV_BUILD_FILE,
@@ -29,6 +30,7 @@ from src.const import (
     ENV_USE_DATED_FOLDERS,
     ENV_WHEEL_DIR,
     LOG_DATE_FORMAT,
+    LOG_FILE_NAME,
     LOG_FORMAT,
     LOG_LEVEL_MAP,
     REPO_DIRECTORIES,
@@ -178,10 +180,19 @@ def set_logging() -> list[logging.Handler]:
     stream_handler.setFormatter(formatter)
     result: list[logging.Handler] = [stream_handler]
 
+    log_to_file = os.getenv(ENV_LOG_TO_FILE) != "0"
+    if log_to_file:
+        file_path = Path(os.getenv(ENV_WHEEL_DIR, LOG_FILE_NAME))
+        file_handler = logging.FileHandler(filename=file_path)
+        file_handler.setLevel(log_level)
+        file_handler.setFormatter(formatter)
+        result.append(file_handler)
     logging.basicConfig(
         format=LOG_FORMAT,
         datefmt=LOG_DATE_FORMAT,
         level=log_level,
         handlers=result,
     )
+    if log_to_file:
+        logger.info("Logging to file.")
     return result
