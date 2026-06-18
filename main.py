@@ -3,7 +3,7 @@
 import logging
 
 from src.build import build_genai, build_openvino, build_tokenizers
-from src.util import build_config_from_env, set_logging, set_script_envs
+from src.util import build_config_from_env, export_config, set_logging, set_script_envs
 
 # Set initial config before logger has loaded
 logger = logging.getLogger(__name__)
@@ -27,6 +27,8 @@ def main() -> None:
     logger.debug(config)
     logger.debug("Setting script envs...")
     set_script_envs(config)
+    if config.Options.SaveUpdateConfig:
+        export_config(config)
     logger.debug("Initializing logger settings...")
     set_logging()
     logger.debug("Initializing Logger settings initialized...")

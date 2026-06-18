@@ -133,13 +133,10 @@ def build_options_config() -> ConfigOptions:
 
 def build_config_from_env() -> ConfigModel:
     """Build OV configuration from the environment variables."""
-    config = ConfigModel(
+    return ConfigModel(
         Options=build_options_config(),
         Packages=build_packages_config(),
     )
-    if config.Options.SaveUpdateConfig:
-        export_config(config)
-    return config
 
 
 def create_short_uuid() -> str:
