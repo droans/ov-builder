@@ -100,7 +100,6 @@ def _create_git_remote_model(remote_data: str) -> GitRemoteModel:
     """Creates a remote model from a string output taken from calling `git remote -v` and splitting by line."""
     msg = f"Got remote data '{remote_data}'"
     logger.info(msg)
-    logger.info(len(remote_data))
     remote_name, address_type = remote_data.split("\t")
     remote_address, remote_type = address_type.split(" ")
     remote_type = remote_type.replace("(", "").replace(")", "")
