@@ -99,7 +99,7 @@ def git_remote_exists(config: OVPackageUpdateModel) -> bool:
 def _create_git_remote_model(remote_data: str) -> GitRemoteModel:
     """Creates a remote model from a string output taken from calling `git remote -v` and splitting by line."""
     msg = f"Got remote data '{remote_data}'"
-    logger.info(msg)
+    logger.debug(msg)
     remote_name, address_type = remote_data.split("\t")
     remote_address, remote_type = address_type.split(" ")
     remote_type = remote_type.replace("(", "").replace(")", "")
@@ -118,7 +118,7 @@ def get_git_remotes(repo_directory: str | Path) -> list[GitRemoteModel]:
     result = _run_git_command(cmd, repo_directory)
     remotes = result.stdout.decode().split("\n")
     msg = f"Remotes: {result.stdout.decode()}"
-    logger.info(msg)
+    logger.debug(msg)
     return [_create_git_remote_model(remote) for remote in remotes if len(remote)]
 
 
@@ -152,7 +152,7 @@ def _run_git_command(
     cmd = f"git -C {repo_dir} {cmd}"
     full_cmd = ["bash", "-c", cmd]
     msg = f"Running command {cmd}"
-    logger.info(msg)
+    logger.debug(msg)
     try:
         result = subprocess.run(full_cmd, check=True, shell=False, capture_output=True)  # noqa: S603
         msg = f"stdout: {result.stdout}"
