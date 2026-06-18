@@ -15,26 +15,26 @@ services:
 
 ## Environment Variables
 
-| Variable                   | Type | Description                                                              | Default                        | Note |
-|----------------------------|------|--------------------------------------------------------------------------|--------------------------------|------|
-| UPDATE_OPENVINO            | int  | Update OpenVINO (1: Update, 0: Skip)                                     | 1                              |      |
-| OPENVINO_GIT_REMOTE        | str  | Remote repo to use for the OV source                                     | openvinotoolkit/openvino       |      |
-| OPENVINO_GIT_BRANCH        | str  | Branch to use for the OV source                                          | master                         | 2    |
-| OPENVINO_GIT_PR            | int  | PR to use for the OV source                                              | unset                          | 2    |
-| OPENVINO_GIT_PR_USE_MERGED | int  | Whether to merge PR with master or use current head for the OV source    | 1                              |      |
-| OPENVINO_BUILD_TYPE        | str  | Build type to use for OpenVINO                                           | ocl                            | 1,3  |
-| OPENVINO_BUILD_FILE        | str  | Build script to use for OpenVINO                                         | unset                          | 1,3  |
-| UPDATE_GENAI               | int  | Update GenAI (1: Update, 0: Skip)                                        | 1                              |      |
-| GENAI_GIT_REMOTE           | str  | Remote repo to use for the GenAI source                                  | openvinotoolkit/openvino.genai |      |
-| GENAI_GIT_BRANCH           | str  | Branch to use for the GenAI source                                       | master                         | 2    |
-| GENAI_GIT_PR               | int  | PR to use for the GenAI source                                           | unset                          | 2    |
-| GENAI_GIT_PR_USE_MERGED    | int  | Whether to merge PR with master or use current head for the GenAI source | 1                              |      |
-| UPDATE_TOKENIZERS          | int  | Update Tokenizers (1: Update, 0: Skip)                                   | 1                              |      |
-| OUTPUT_DIR                 | str  | Container directory to save wheels                                       | /output                        |      |
-| USE_DATED_FOLDERS          | int  | Save wheels to dated subdirectories                                      | 1                              | 4    |
-| SAVE_UPDATE_CONFIG         | int  | Save the config used to generate the wheels                              | 1                              |      |
-| LOG_LEVEL                  | str  | Logging level to use.                                                    | info                           | 5    |
-| LOG_TO_FILE                | int  | Save logs to file. Will save in the output directory.                    | 1                              |      |
+| Variable                   | Type | Description                                                                                | Default                        | Note |
+|----------------------------|------|--------------------------------------------------------------------------------------------|--------------------------------|------|
+| UPDATE_OPENVINO            | int  | Update OpenVINO (1: Update, 0: Skip)                                                       | 1                              |      |
+| OPENVINO_GIT_REMOTE        | str  | Remote repo to use for the OV source                                                       | openvinotoolkit/openvino       |      |
+| OPENVINO_GIT_BRANCH        | str  | Branch to use for the OV source                                                            | master                         | 2    |
+| OPENVINO_GIT_PR            | int  | PR to use for the OV source                                                                | unset                          | 2    |
+| OPENVINO_GIT_PR_USE_MERGED | int  | Whether to merge PR with master or use current head for the OV source (1=Merge, 0=Head)    | 1                              |      |
+| OPENVINO_BUILD_TYPE        | str  | Build type to use for OpenVINO                                                             | ocl                            | 1,3  |
+| OPENVINO_BUILD_FILE        | str  | Build script to use for OpenVINO                                                           | unset                          | 1,3  |
+| UPDATE_GENAI               | int  | Update GenAI (1: Update, 0: Skip)                                                          | 1                              |      |
+| GENAI_GIT_REMOTE           | str  | Remote repo to use for the GenAI source                                                    | openvinotoolkit/openvino.genai |      |
+| GENAI_GIT_BRANCH           | str  | Branch to use for the GenAI source                                                         | master                         | 2    |
+| GENAI_GIT_PR               | int  | PR to use for the GenAI source                                                             | unset                          | 2    |
+| GENAI_GIT_PR_USE_MERGED    | int  | Whether to merge PR with master or use current head for the GenAI source (1=Merge, 0=Head) | 1                              |      |
+| UPDATE_TOKENIZERS          | int  | Update Tokenizers (1: Update, 0: Skip)                                                     | 1                              |      |
+| OUTPUT_DIR                 | str  | Container directory to save wheels                                                         | /output                        |      |
+| USE_DATED_FOLDERS          | int  | Save wheels to dated subdirectories (1=Use dated, 0=Save in output dir)                    | 1                              | 4    |
+| SAVE_UPDATE_CONFIG         | int  | Save the config used to generate the wheels (1=Save, 0=Don't save)                         | 1                              |      |
+| LOG_LEVEL                  | str  | Logging level to use.                                                                      | info                           | 5    |
+| LOG_TO_FILE                | int  | Save logs to file. Will save in the output directory. (1=Save, 0=Don't save)               | 1                              |      |
 
 ##### Notes
 1. Options: ocl, ocl-debug, ze, ze-debug, sycl, sycl-debug. Some options may not be enabled yet.
