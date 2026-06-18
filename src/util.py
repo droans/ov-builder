@@ -133,10 +133,13 @@ def build_options_config() -> ConfigOptions:
 
 def build_config_from_env() -> ConfigModel:
     """Build OV configuration from the environment variables."""
-    return ConfigModel(
+    config = ConfigModel(
         Options=build_options_config(),
         Packages=build_packages_config(),
     )
+    if config.Options.SaveUpdateConfig:
+        export_config(config)
+    return config
 
 
 def create_short_uuid() -> str:
@@ -155,8 +158,8 @@ def set_script_envs(config: ConfigModel) -> None:
     os.environ[ENV_WHEEL_DIR] = out_dir.as_posix()
 
 
-def export_environ(config: ConfigModel) -> None:
-    """Exports the environment variables to a JSON file."""
+def export_config(config: ConfigModel) -> None:
+    """Exports the config to a JSON file."""
     save_dir = os.environ[ENV_WHEEL_DIR]
     path = Path(save_dir, UPDATE_CONFIG_FILE_NAME)
     with open(path, "w") as f:
