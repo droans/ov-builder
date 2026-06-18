@@ -32,7 +32,7 @@ services:
 | UPDATE_TOKENIZERS          | int  | Update Tokenizers (1: Update, 0: Skip)                                   | 1                              |      |
 | OUTPUT_DIR                 | str  | Container directory to save wheels                                       | /output                        |      |
 | USE_DATED_FOLDERS          | int  | Save wheels to dated subdirectories                                      | 1                              | 4    |
-| SAVE_UPDATE_ENVS           | int  | Save the envs used with the wheels                                       | 1                              |      |
+| SAVE_UPDATE_CONFIG         | int  | Save the config used to generate the wheels                              | 1                              |      |
 
 
 ##### Notes

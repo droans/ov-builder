@@ -19,12 +19,13 @@ from src.const import (
     ENV_OV,
     ENV_OV_BUILD_FILE,
     ENV_OV_BUILD_TYPE,
-    ENV_SAVE_UPDATE_ENVS,
+    ENV_SAVE_UPDATE_CONFIG,
     ENV_TOKENIZERS,
     ENV_UPDATE_PREFIX,
     ENV_USE_DATED_FOLDERS,
     ENV_WHEEL_DIR,
     REPO_DIRECTORIES,
+    UPDATE_CONFIG_FILE_NAME,
     PackageType,
 )
 from src.models import (
@@ -108,12 +109,12 @@ def build_options_config() -> ConfigOptions:
     """Build the model for config options."""
     output_dir = Path(os.getenv(ENV_OUTPUT_DIR) or DEFAULT_OUTPUT_DIR)
     use_dated_folders = os.getenv(ENV_USE_DATED_FOLDERS) != "0"
-    save_update_envs = os.getenv(ENV_SAVE_UPDATE_ENVS) != "0"
+    save_update_config = os.getenv(ENV_SAVE_UPDATE_CONFIG) != "0"
 
     return ConfigOptions(
         OutputDirectory=output_dir,
         UseDatedFolders=use_dated_folders,
-        SaveUpdateEnvs=save_update_envs,
+        SaveUpdateConfig=save_update_config,
     )
 
 
@@ -139,3 +140,11 @@ def set_script_envs(config: ConfigModel) -> None:
         out_dir = Path(out_dir, dt_str)
         out_dir.mkdir()
     os.environ[ENV_WHEEL_DIR] = out_dir.as_posix()
+
+
+def export_environ(config: ConfigModel) -> None:
+    """Exports the environment variables to a JSON file."""
+    save_dir = os.environ[ENV_WHEEL_DIR]
+    path = Path(save_dir, UPDATE_CONFIG_FILE_NAME)
+    with open(path, "w") as f:
+        f.write(config.model_dump_json())

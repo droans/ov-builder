@@ -158,8 +158,8 @@ ENV UPDATE_TOKENIZERS=1
 ENV OUTPUT_DIR="/output"
 # Use dated folders (eg, OUTPUT_DIR/2026_06_17) to keep regular backups. 1=Yes, 0=No (Default: 1)
 ENV USE_DATED_FOLDERS=1
-# Save update environmental variables with the built wheels. 1=Yes, 0=No (Default: 1)
-ENV SAVE_UPDATE_ENVS=1
+# Save configuration from environmental variables with the built wheels. 1=Yes, 0=No (Default: 1)
+ENV SAVE_UPDATE_CONFIG=1
 
 # ============================================================================
 # Clone and setup program

@@ -33,7 +33,7 @@ class ConfigOptions(BaseModel):
 
     OutputDirectory: DirectoryPath
     UseDatedFolders: bool
-    SaveUpdateEnvs: bool
+    SaveUpdateConfig: bool
 
 
 class UpdateConfigModel(BaseModel):
