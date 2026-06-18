@@ -60,7 +60,7 @@ OV_BUILD_SCRIPTS_PATH: dict[BuildTypes, str | None] = {
     "ze": "ze/build.sh",
     "sycl": None,
     "ocl-debug": "ocl/build-debug.sh",
-    "ze-debug": None,
+    "ze-debug": "ze/build-debug.sh",
     "sycl-debug": None,
 }
 GENAI_BUILD_SCRIPT = "/build_scripts/genai/build.sh"
