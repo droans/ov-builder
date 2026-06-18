@@ -122,12 +122,14 @@ def build_options_config() -> ConfigOptions:
     use_dated_folders = os.getenv(ENV_USE_DATED_FOLDERS) != "0"
     save_update_config = os.getenv(ENV_SAVE_UPDATE_CONFIG) != "0"
     log_level = get_log_level_env()
+    log_to_file = os.getenv(ENV_LOG_TO_FILE) != "0"
 
     return ConfigOptions(
         OutputDirectory=output_dir,
         UseDatedFolders=use_dated_folders,
         SaveUpdateConfig=save_update_config,
         LogLevel=log_level,
+        LogToFile=log_to_file,
     )
 
 

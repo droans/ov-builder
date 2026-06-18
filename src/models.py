@@ -35,6 +35,7 @@ class ConfigOptions(BaseModel):
     UseDatedFolders: bool
     SaveUpdateConfig: bool
     LogLevel: LogLevels
+    LogToFile: bool
 
 
 class UpdateConfigModel(BaseModel):
