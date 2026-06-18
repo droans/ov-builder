@@ -3,7 +3,7 @@ name = "ov-builder"
 version = "0.1.0"
 description = "Build OpenVINO source files in a Docker container"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "pydantic>=2.13.4",
     "ty>=0.0.49",
