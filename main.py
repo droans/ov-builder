@@ -5,17 +5,7 @@ import logging
 from src.build import build_genai, build_openvino, build_tokenizers
 from src.util import build_config_from_env, export_config, set_logging, set_script_envs
 
-# Set initial config before logger has loaded
 logger = logging.getLogger(__name__)
-log_fmt = "%(asctime)s | %(levelname)s | %(message)s"
-handler = logging.StreamHandler()
-handler.setLevel(logging.DEBUG)
-handler.setFormatter(logging.Formatter(log_fmt))
-logging.basicConfig(
-    format=log_fmt,
-    level=logging.DEBUG,
-    handlers=[handler],
-)
 
 
 def main() -> None:

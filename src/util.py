@@ -182,7 +182,7 @@ def set_logging() -> list[logging.Handler]:
 
     log_to_file = os.getenv(ENV_LOG_TO_FILE) != "0"
     if log_to_file:
-        file_path = Path(os.getenv(ENV_WHEEL_DIR, LOG_FILE_NAME))
+        file_path = Path(os.getenv(ENV_WHEEL_DIR, DEFAULT_OUTPUT_DIR), LOG_FILE_NAME)
         file_handler = logging.FileHandler(filename=file_path)
         file_handler.setLevel(log_level)
         file_handler.setFormatter(formatter)
@@ -195,4 +195,6 @@ def set_logging() -> list[logging.Handler]:
     )
     if log_to_file:
         logger.info("Logging to file.")
+        msg = f"Using file path: {file_path}"
+        logger.info(msg)
     return result
