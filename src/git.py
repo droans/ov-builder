@@ -59,6 +59,11 @@ def select_git_pr(config: OVPackageUpdateModel) -> None:
     msg = f"Using command: {cmd}"
     logger.debug(msg)
     _run_git_command(cmd, config)
+    checkout_cmd = f"checkout -q {branch_uuid}"
+    logger.debug("Checking out...")
+    msg = f"Using command: {cmd}"
+    logger.debug(msg)
+    _run_git_command(checkout_cmd, config)
 
 
 def add_git_remote(config: OVPackageUpdateModel) -> GitRemoteModel:
