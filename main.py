@@ -3,6 +3,7 @@
 import logging
 
 from src.build import build_genai, build_openvino, build_tokenizers
+from src.git import sync_git_repos
 from src.util import build_config_from_env, export_config, set_logging, set_script_envs
 
 logger = logging.getLogger(__name__)
@@ -23,6 +24,7 @@ def main() -> None:
     logger.info("Initializing logger settings...")
     set_logging()
     logger.debug("Initializing Logger settings initialized...")
+    sync_git_repos(config)
     build_openvino(config.Packages.OpenVINO)
     build_tokenizers(config.Packages.Tokenizers)
     build_genai(config.Packages.GenAI)

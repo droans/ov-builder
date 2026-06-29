@@ -9,7 +9,6 @@ from src.const import (
     OV_BUILD_SCRIPTS_PATH,
     TOKENIZERS_BUILD_SCRIPT,
 )
-from src.git import sync_git_repo
 from src.models import BasePackageUpdateModel, OpenVINOPackageUpdateModel, OVPackageUpdateModel
 
 logger = logging.getLogger(__name__)
@@ -22,7 +21,6 @@ def build_openvino(config: OpenVINOPackageUpdateModel) -> None:
         return
     logger.info("Building OpenVINO")
     update_ov_dependencies()
-    sync_git_repo(config)
     if config.BuildFile and config.BuildFile.exists():
         msg = f"Using script at {config.BuildFile}"
         logger.info(msg)
@@ -43,7 +41,6 @@ def build_genai(config: OVPackageUpdateModel) -> None:
         logger.info("UPDATE_GENAI set to 0, not building.")
         return
     logger.info("Building OpenVINO-GenAI")
-    sync_git_repo(config)
     subprocess.run([GENAI_BUILD_SCRIPT], check=True, shell=True)  # noqa: S602
     logger.info("Finished building OpenVINO-GenAI")
 

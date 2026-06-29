@@ -5,10 +5,21 @@ import subprocess
 from pathlib import Path
 from typing import overload
 
-from src.models import GitRemoteModel
+from src.models import ConfigModel, GitRemoteModel
 from src.util import OVPackageUpdateModel, create_short_uuid
 
 logger = logging.getLogger(__name__)
+
+
+def sync_git_repos(config: ConfigModel) -> None:
+    """Syncs all git repos from the config at once."""
+    packages = config.Packages
+    logger.debug("Syncing repos....")
+    logger.debug("Syncing OpenVINO repo.")
+    sync_git_repo(packages.OpenVINO)
+    logger.debug("Syncing GenAI repo.")
+    sync_git_repo(packages.GenAI)
+    logger.debug("Finished syncing repos")
 
 
 def sync_git_repo(config: OVPackageUpdateModel) -> None:
