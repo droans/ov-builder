@@ -1,5 +1,6 @@
 """Scripts related to git commands over repository."""
 
+import contextlib
 import logging
 import subprocess
 from pathlib import Path
@@ -25,11 +26,13 @@ def sync_git_repos(config: ConfigModel) -> None:
 def sync_git_repo(config: OVPackageUpdateModel) -> None:
     """Synchronize a git repository."""
     get_git_remote(config, create=True)
+    with contextlib.suppress(BaseException):
+        # Any command failure is likely due to a branch already being checked out,
+        update_git_repo(config)
     if config.PullRequest:
         select_git_pr(config)
     else:
         select_git_branch(config)
-    update_git_repo(config)
 
 
 def update_git_repo(config: OVPackageUpdateModel) -> None:
